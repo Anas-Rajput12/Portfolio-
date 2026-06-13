@@ -179,17 +179,13 @@ npx prisma generate
 - AI: Python, NLP, RAG, Voice AI, OpenAI APIs
 - Tools: Docker, Git, Vercel
 
-**Admin Access:**
-- Email: admin@anasqadri.com
-- Password: admin123
-- (Change in production!)
 
 ## 📞 Support
 
 Muhammad Anas Qadri
-- Email: contact@anasqadri.com
-- GitHub: [muhammadanasqadri](https://github.com/muhammadanasqadri)
-- LinkedIn: [muhammadanasqadri](https://linkedin.com/in/muhammadanasqadri)
+- Email: muhammadanasqadri2@gmail.com
+- GitHub: https://github.com/Anas-Rajput12
+- LinkedIn: https://www.linkedin.com/in/muhammad-anas-qadri-a7608a2b7/
 
 ---
 
