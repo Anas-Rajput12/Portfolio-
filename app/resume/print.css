@@ -1,0 +1,91 @@
+/* Print-optimized styles for PDF generation */
+@media print {
+  /* Page setup */
+  @page {
+    size: A4;
+    margin: 15mm;
+  }
+
+  body {
+    background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Override dark theme for print */
+  .min-h-screen {
+    min-height: auto !important;
+    background: white !important;
+  }
+
+  /* Make text readable on white background */
+  .text-gray-100,
+  .text-gray-200,
+  .text-gray-300 {
+    color: #1a1a1a !important;
+  }
+
+  .text-gray-400 {
+    color: #4a4a4a !important;
+  }
+
+  .text-cyan-400,
+  .text-blue-400,
+  .text-blue-500 {
+    color: #0369a1 !important;
+  }
+
+  /* Clean backgrounds for print */
+  .bg-slate-800,
+  .bg-slate-700 {
+    background-color: white !important;
+    border: 1px solid #e5e7eb !important;
+  }
+
+  /* Borders */
+  .border-slate-700,
+  .border-slate-600 {
+    border-color: #d1d5db !important;
+  }
+
+  /* Gradients to solid colors */
+  .bg-gradient-to-r,
+  .bg-gradient-to-br {
+    background: white !important;
+    color: #0369a1 !important;
+    -webkit-text-fill-color: #0369a1 !important;
+  }
+
+  /* Remove animations and shadows */
+  * {
+    animation: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Better page breaks */
+  section {
+    page-break-inside: avoid;
+  }
+
+  /* Remove absolute positioned decorative elements */
+  .absolute {
+    display: none !important;
+  }
+
+  /* Ensure good contrast */
+  a {
+    color: #0369a1 !important;
+    text-decoration: underline;
+  }
+}
+
+/* Print mode class for when user clicks download */
+.print-mode {
+  /* This can be used for additional print-specific styling */
+}

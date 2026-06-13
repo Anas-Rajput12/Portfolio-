@@ -1,0 +1,323 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// User model for authentication
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  posts     BlogPost[]
+  accounts  Account[]
+  sessions  Session[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// NextAuth models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Profile model - main portfolio information
+model Profile {
+  id          String   @id @default(cuid())
+  name        String
+  title       String
+  bio         String   @db.Text
+  email       String
+  phone       String?
+  location    String?
+  resumeUrl   String?
+  githubUrl   String?
+  linkedinUrl String?
+  twitterUrl  String?
+  avatarUrl   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Projects model
+model Project {
+  id              String   @id @default(cuid())
+  title           String
+  slug            String   @unique
+  description     String   @db.Text
+  longDescription String?  @db.Text
+  techStack       String[] // Array of technologies
+  category        String
+  featured        Boolean  @default(false)
+  githubUrl       String?
+  liveUrl         String?
+  imageUrl        String?
+  images          String[] // Array of image URLs
+  order           Int      @default(0)
+  published       Boolean  @default(true)
+  views           Int      @default(0)
+  likes           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([slug])
+  @@index([category])
+  @@index([featured])
+}
+
+// Experience model
+model Experience {
+  id             String    @id @default(cuid())
+  company        String
+  role           String
+  description    String    @db.Text
+  location       String?
+  employmentType String    @default("Full-time")
+  startDate      DateTime
+  endDate        DateTime?
+  current        Boolean   @default(false)
+  order          Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([current])
+}
+
+// Skills model
+model Skill {
+  id        String      @id @default(cuid())
+  name      String      @unique
+  category  SkillCategory
+  level     SkillLevel  @default(INTERMEDIATE)
+  icon      String?
+  order     Int         @default(0)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+
+  @@index([category])
+}
+
+enum SkillCategory {
+  FRONTEND
+  BACKEND
+  AI
+  TOOLS
+  DATABASE
+  OTHER
+}
+
+enum SkillLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+// Achievements model
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  date        DateTime
+  category    String
+  icon        String?
+  order       Int      @default(0)
+  published   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published])
+}
+
+// Education model
+model Education {
+  id          String    @id @default(cuid())
+  institution String
+  degree      String
+  field       String
+  location    String?
+  startDate   DateTime
+  endDate     DateTime?
+  description String?   @db.Text
+  grade       String?
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// Blog posts model
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  excerpt     String   @db.Text
+  content     String   @db.Text
+  coverImage  String?
+  published   Boolean  @default(false)
+  views       Int      @default(0)
+  readTime    Int      @default(5) // in minutes
+  tags        String[]
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+
+  @@index([slug])
+  @@index([published])
+  @@index([authorId])
+}
+
+// Testimonials model
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  role      String
+  company   String?
+  content   String   @db.Text
+  avatarUrl String?
+  rating    Int      @default(5)
+  published Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([published])
+}
+
+// Contact messages model
+model Message {
+  id        String        @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String        @db.Text
+  status    MessageStatus @default(UNREAD)
+  reply     String?       @db.Text
+  repliedAt DateTime?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+enum MessageStatus {
+  UNREAD
+  READ
+  REPLIED
+}
+
+// Chat conversations model
+model ChatConversation {
+  id         String        @id @default(cuid())
+  sessionId  String        @unique
+  visitorId  String?
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+
+  messages   ChatMessage[]
+
+  @@index([sessionId])
+}
+
+// Chat messages model
+model ChatMessage {
+  id             String           @id @default(cuid())
+  conversationId String
+  conversation   ChatConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           ChatRole
+  content        String           @db.Text
+  tokens         Int              @default(0)
+  createdAt      DateTime         @default(now())
+
+  @@index([conversationId])
+}
+
+enum ChatRole {
+  USER
+  ASSISTANT
+}
+
+// Knowledge base for RAG
+model KnowledgeBase {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  embedding String?  @db.Text // Store as JSON array string
+  source    String   // profile, project, experience, skill, etc.
+  sourceId  String?  // ID of the source entity
+  metadata  Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([source])
+  @@index([sourceId])
+}
+
+// Site settings model
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       Json
+  description String?
+  updatedAt   DateTime @updatedAt
+}
+
+// Analytics model
+model Analytics {
+  id             String   @id @default(cuid())
+  path           String
+  views          Int      @default(0)
+  uniqueVisitors Int      @default(0)
+  date           DateTime @default(now())
+  createdAt      DateTime @default(now())
+
+  @@unique([path, date])
+  @@index([path])
+  @@index([date])
+}
