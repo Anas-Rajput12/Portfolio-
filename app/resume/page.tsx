@@ -9,6 +9,24 @@ import './print.css';
 
 export default function ResumePage() {
   const resumeRef = useRef<HTMLDivElement>(null);
+  const handleDownloadPDF = () => {
+    window.print();
+  };
+
+  // ✅ DOWNLOAD MARKDOWN FILE
+  const handleDownloadMD = () => {
+    const mdContent = generateMarkdownResume();
+    const blob = new Blob([mdContent], { type: 'text/markdown' });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'Muhammad_Anas_Qadri_Resume.md';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   const generateMarkdownResume = () => {
   return `# Muhammad Anas Qadri
