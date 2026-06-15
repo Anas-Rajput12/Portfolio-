@@ -4,11 +4,13 @@ import { motion } from 'framer-motion';
 import { Download, Mail, Globe, FileText, FileDown } from 'lucide-react';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { Button } from '@/components/ui/button';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './print.css';
 
 export default function ResumePage() {
   const resumeRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
+
   const handleDownloadPDF = async () => {
   try {
     const { pdf } = await import("@react-pdf/renderer");
@@ -303,17 +305,19 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
     Download MD
   </Button>
 
-</div>
+            </div>
+          </div>
+        </motion.div>
 
-{/* Resume Content */}
+        {/* Resume Content */}
 
-<motion.div
-  ref={resumeRef}
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5, delay: 0.1 }}
-  className="bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 md:p-12 space-y-8 shadow-2xl"
->
+        <motion.div
+          ref={resumeRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 md:p-12 space-y-8 shadow-2xl"
+        >
 
 
 <div className="text-center space-y-4 pb-8 border-b border-slate-700/50">
@@ -586,7 +590,7 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
 
 </motion.div>
 
-/* Back to Home Button */
+{/* Back to Home Button */}
 
 <motion.div
   initial={{ opacity: 0 }}
