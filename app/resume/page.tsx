@@ -306,7 +306,7 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
   </div>
 </div>
 
-/* Professional Summary */
+
 
 <section>
   <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 flex items-center gap-2">
@@ -319,7 +319,7 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
   </p>
 </section>
 
-/* Technical Skills */
+
 
 <section>
   <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 flex items-center gap-2">
@@ -433,7 +433,7 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
   </div>
 </section>
 
-/* Projects */
+
 
 <section>
   <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 flex items-center gap-2">
@@ -486,7 +486,6 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
   </div>
 </section>
 
-/* Hackathons & Achievements */
 
 <section>
   <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 flex items-center gap-2">
@@ -523,7 +522,7 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
   </div>
 </section>
 
-/* Education */
+
 
 <section>
   <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 flex items-center gap-2">
