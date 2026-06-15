@@ -208,6 +208,70 @@ export const ResumePDF = () => (
         </View>
       </View>
 
+      {/* Experience */}
+<View style={styles.section}>
+  <Text style={styles.sectionTitle}>Experience</Text>
+
+  {/* Web Developer Intern */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      Web Developer Intern – High Tech Software House
+    </Text>
+    <Text style={styles.projectTech}>
+      07/2025 – 08/2025 • Nawabshah
+    </Text>
+    <Text style={styles.text}>
+      Developed responsive web applications using HTML, CSS, JavaScript, React, and Next.js. 
+      Collaborated with senior developers on client-based projects to deliver high-performance solutions. 
+      Improved UI/UX using modern responsive design principles and gained hands-on experience in Git and Agile workflows.
+    </Text>
+  </View>
+
+  {/* AI Developer */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      AI Developer – UK-Based Company (Remote)
+    </Text>
+    <Text style={styles.projectTech}>
+      02/2026 – 04/2026 • Remote
+    </Text>
+    <Text style={styles.text}>
+      Developed an AI-powered tutor system with real-time interaction. 
+      Integrated speech-to-text and text-to-speech APIs for voice-based communication. 
+      Focused on building intelligent AI systems for education and automation.
+    </Text>
+  </View>
+
+  {/* Hackathon Project */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      Hackathon Project – E-Commerce Platform
+    </Text>
+    <Text style={styles.projectTech}>
+      12/2024 – 01/2025 • GIAIC, Karachi
+    </Text>
+    <Text style={styles.text}>
+      Built a responsive e-commerce platform with modern UI/UX design and optimized performance. 
+      Worked in a fast-paced hackathon environment focusing on teamwork and problem-solving.
+    </Text>
+  </View>
+
+  {/* Final Year Project */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      Final Year Project – Voice-Based Virtual Assistant
+    </Text>
+    <Text style={styles.projectTech}>
+      11/2024 – 08/2025 • QUEST Nawabshah
+    </Text>
+    <Text style={styles.text}>
+      Designed and developed a voice-enabled virtual assistant to support students’ academic needs. 
+      Integrated NLP and speech recognition for multilingual interaction and automated response system.
+    </Text>
+  </View>
+
+</View>
+
       {/* Featured Projects */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Featured Projects</Text>
