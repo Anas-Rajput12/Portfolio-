@@ -542,3 +542,7 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
     ← Back to Portfolio
   </a>
 </motion.div>
+</div>
+</div> 
+  ); 
+}
