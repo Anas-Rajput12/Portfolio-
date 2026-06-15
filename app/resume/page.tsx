@@ -274,7 +274,6 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
   className="bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm rounded-2xl p-6 md:p-12 space-y-8 shadow-2xl"
 >
 
-/* Header Section */
 
 <div className="text-center space-y-4 pb-8 border-b border-slate-700/50">
   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-100">
