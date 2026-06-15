@@ -333,6 +333,77 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
             </div>
           </section>
 
+          {/* Experience */}
+<section>
+  <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 flex items-center gap-2">
+    <div className="h-1 w-12 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full" />
+    Experience
+  </h3>
+
+  <div className="space-y-6">
+
+    {/* Web Developer Intern */}
+    <div className="border-l-4 border-l-cyan-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-1">
+        Web Developer Intern – High Tech Software House
+      </h4>
+      <p className="text-cyan-400 text-xs md:text-sm mb-2">
+        07/2025 – 08/2025 • Nawabshah
+      </p>
+      <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+        Developed responsive web applications using HTML, CSS, JavaScript, React, and Next.js. 
+        Collaborated with senior developers on client-based projects to deliver high-performance solutions. 
+        Improved UI/UX using modern responsive design principles and gained hands-on experience in Git and Agile workflows.
+      </p>
+    </div>
+
+    {/* AI Developer */}
+    <div className="border-l-4 border-l-blue-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-1">
+        AI Developer – UK-Based Company (Remote)
+      </h4>
+      <p className="text-cyan-400 text-xs md:text-sm mb-2">
+        02/2026 – 04/2026 • Remote
+      </p>
+      <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+        Developed an AI-powered tutor system with real-time interaction. 
+        Integrated speech-to-text and text-to-speech APIs for voice-based communication. 
+        Focused on building intelligent, responsive AI systems for education and user engagement.
+      </p>
+    </div>
+
+    {/* Hackathon Project */}
+    <div className="border-l-4 border-l-purple-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-1">
+        Hackathon Project – E-Commerce Platform
+      </h4>
+      <p className="text-cyan-400 text-xs md:text-sm mb-2">
+        12/2024 – 01/2025 • GIAIC, Karachi
+      </p>
+      <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+        Built a responsive e-commerce platform with modern UI/UX design and optimized performance. 
+        Focused on teamwork, problem-solving, and delivering a functional product under hackathon deadlines.
+      </p>
+    </div>
+
+    {/* Final Year Project */}
+    <div className="border-l-4 border-l-green-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-1">
+        Final Year Project – Voice-Based Virtual Assistant
+      </h4>
+      <p className="text-cyan-400 text-xs md:text-sm mb-2">
+        11/2024 – 08/2025 • QUEST Nawabshah
+      </p>
+      <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+        Designed and developed a voice-enabled virtual assistant to support students’ academic needs. 
+        Integrated NLP and speech recognition for multilingual interaction and built automated response systems 
+        to enhance student accessibility and productivity.
+      </p>
+    </div>
+
+  </div>
+</section>
+
           {/* Projects */}
           <section>
             <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 flex items-center gap-2">
@@ -422,6 +493,7 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
               </div>
             </div>
           </section>
+          
 
           {/* Education */}
           <section>
