@@ -273,45 +273,90 @@ export const ResumePDF = () => (
 </View>
 
       {/* Featured Projects */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Featured Projects</Text>
+      {/* PROJECTS */}
+<View style={styles.section}>
+  <Text style={styles.sectionTitle}>Featured Projects</Text>
 
-        <View style={styles.projectItem}>
-          <Text style={styles.projectTitle}>AI Customer Support Chatbot SaaS</Text>
-          <Text style={styles.projectDesc}>
-            Production-ready AI SaaS chatbot using GPT-4o and RAG for intelligent customer support with
-            document-based knowledge retrieval. Implemented advanced natural language processing and
-            context-aware responses with scalable architecture.
-          </Text>
-          <Text style={styles.projectTech}>
-            Next.js 15 • TypeScript • OpenAI GPT-4o • Prisma • PostgreSQL • NextAuth
-          </Text>
-        </View>
+  {/* AI Customer Support Chatbot SaaS */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      AI Customer Support Chatbot SaaS
+    </Text>
+    <Text style={styles.projectDesc}>
+      AI-powered SaaS chatbot using GPT-4o and RAG for intelligent customer support with document-based knowledge retrieval.
+      Built scalable architecture with authentication and database integration.
+    </Text>
+    <Text style={styles.projectTech}>
+      Next.js 15 • TypeScript • OpenAI GPT-4o • Prisma ORM • PostgreSQL • NextAuth
+    </Text>
+  </View>
 
-        <View style={styles.projectItem}>
-          <Text style={styles.projectTitle}>AI-Powered Todo App with Chatbot Assistant</Text>
-          <Text style={styles.projectDesc}>
-            Smart task management application with AI chatbot that helps users create and organize tasks
-            using natural language. Features intelligent task prioritization and context understanding.
-          </Text>
-          <Text style={styles.projectTech}>
-            Next.js • FastAPI • Better Auth • Neon DB
-          </Text>
-        </View>
+  {/* AI Todo App */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      AI-Powered Todo App with Chatbot Assistant
+    </Text>
+    <Text style={styles.projectDesc}>
+      Smart task management application with AI chatbot that helps users create, organize, and manage tasks using natural language processing.
+    </Text>
+    <Text style={styles.projectTech}>
+      Next.js • FastAPI • Better Auth • Neon DB
+    </Text>
+  </View>
 
-        <View style={styles.projectItem}>
-          <Text style={styles.projectTitle}>Car Rental E-Commerce Platform</Text>
-          <Text style={styles.projectDesc}>
-            Full-stack car rental website with real-time listings, comprehensive booking system,
-            CMS integration and modern responsive UI. Implemented secure payment processing and
-            user management.
-          </Text>
-          <Text style={styles.projectTech}>
-            React • Sanity CMS • Node.js • MongoDB
-          </Text>
-        </View>
-      </View>
-    </Page>
+  {/* Physical AI Book RAG */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      Physical AI Book with RAG-Powered Chatbot
+    </Text>
+    <Text style={styles.projectDesc}>
+      Intelligent AI system that allows users to interact with book content using Retrieval-Augmented Generation (RAG) and semantic search.
+    </Text>
+    <Text style={styles.projectTech}>
+      Docusaurus • Qdrant • NeonDB • FastAPI
+    </Text>
+  </View>
+
+  {/* Car Rental */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      Car Rental Website
+    </Text>
+    <Text style={styles.projectDesc}>
+      Full-stack car rental platform with real-time vehicle listings, booking system, and modern responsive UI.
+    </Text>
+    <Text style={styles.projectTech}>
+      React • Sanity CMS • Node.js • MongoDB
+    </Text>
+  </View>
+
+  {/* Voice Assistant */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      Voice-Based Virtual Assistant
+    </Text>
+    <Text style={styles.projectDesc}>
+      AI-powered assistant using speech recognition and NLP for real-time responses and task automation for students.
+    </Text>
+    <Text style={styles.projectTech}>
+      Next.js • TypeScript • Speech Recognition API • Node.js
+    </Text>
+  </View>
+
+  {/* E-Commerce */}
+  <View style={styles.projectItem}>
+    <Text style={styles.projectTitle}>
+      Bandage E-Commerce Website
+    </Text>
+    <Text style={styles.projectDesc}>
+      Responsive e-commerce website with cart system, authentication, and secure checkout functionality.
+    </Text>
+    <Text style={styles.projectTech}>
+      Next.js • Tailwind CSS • Sanity CMS • Node.js
+    </Text>
+  </View>
+
+</View>
 
     {/* Page 2 */}
     <Page size="A4" style={styles.page}>
