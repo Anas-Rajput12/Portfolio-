@@ -9,24 +9,53 @@ import './print.css';
 
 export default function ResumePage() {
   const resumeRef = useRef<HTMLDivElement>(null);
-  const handleDownloadPDF = () => {
-    window.print();
-  };
+  const handleDownloadPDF = async () => {
+  try {
+    const { pdf } = await import("@react-pdf/renderer");
+    const { ResumePDF } = await import("./ResumePDF");
+
+    const instance = pdf(<ResumePDF />);
+    const blob = await instance.toBlob();
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Muhammad_Anas_Qadri_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+
+    // Cleanup (IMPORTANT FIX)
+    link.remove();
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    alert("Error generating PDF: " + (error as Error).message);
+  }
+};
 
   // ✅ DOWNLOAD MARKDOWN FILE
   const handleDownloadMD = () => {
-    const mdContent = generateMarkdownResume();
-    const blob = new Blob([mdContent], { type: 'text/markdown' });
+  try {
+    const markdown = generateMarkdownResume();
+
+    const blob = new Blob([markdown], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
 
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'Muhammad_Anas_Qadri_Resume.md';
+    link.download = "Muhammad_Anas_Qadri_Resume.md";
+
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);
+
+    // Cleanup (IMPORTANT FIX)
+    link.remove();
     URL.revokeObjectURL(url);
-  };
+  } catch (error) {
+    console.error("Error generating markdown:", error);
+  }
+};
 
   const generateMarkdownResume = () => {
   return `# Muhammad Anas Qadri
@@ -246,24 +275,35 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
               Professional Resume
             </h1>
 
-            <div className="flex gap-3 no-print">
-              <Button onClick={handleDownloadPDF}>
-               <FileDown className="w-4 h-4" /> 
-                Download PDF
-                </Button>
+            {/* Download Buttons */}
+<div className="flex gap-3 no-print">
+  
+  {/* PDF BUTTON */}
+  <Button
+    onClick={async () => {
+      setLoading(true);
+      await handleDownloadPDF();
+      setLoading(false);
+    }}
+    disabled={loading}
+    className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white shadow-lg shadow-blue-500/30 gap-2 transition-all duration-300 disabled:opacity-60"
+  >
+    <FileDown className="w-4 h-4" />
+    {loading ? "Generating PDF..." : "Download PDF"}
+  </Button>
 
-<Button
-  onClick={handleDownloadMD}
-  variant="outline"
-  className="bg-slate-800/50 border-slate-700/50 text-gray-300 hover:bg-slate-800 hover:text-white hover:border-cyan-500/50 gap-2 transition-all duration-300"
->
-  <FileText className="w-4 h-4" />
-  Download MD
-</Button>
+  {/* MD BUTTON */}
+  <Button
+    onClick={handleDownloadMD}
+    disabled={loading}
+    variant="outline"
+    className="bg-slate-800/50 border-slate-700/50 text-gray-300 hover:bg-slate-800 hover:text-white hover:border-cyan-500/50 gap-2 transition-all duration-300 disabled:opacity-60"
+  >
+    <FileText className="w-4 h-4" />
+    Download MD
+  </Button>
 
 </div>
-</div>
-</motion.div>
 
 /* Resume Content */
 
