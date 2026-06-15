@@ -305,7 +305,7 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
 
 </div>
 
-/* Resume Content */
+{/* Resume Content */}
 
 <motion.div
   ref={resumeRef}
