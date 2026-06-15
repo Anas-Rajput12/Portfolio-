@@ -248,8 +248,9 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
 
             <div className="flex gap-3 no-print">
               <Button onClick={handleDownloadPDF}>
-               <FileDown className="w-4 h-4" /> Download PDF
-</Button>
+               <FileDown className="w-4 h-4" /> 
+                Download PDF
+                </Button>
 
 <Button
   onClick={handleDownloadMD}
