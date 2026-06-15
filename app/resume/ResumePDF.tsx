@@ -354,12 +354,14 @@ export const ResumePDF = () => (
     <Text style={styles.projectTech}>
       Next.js • Tailwind CSS • Sanity CMS • Node.js
     </Text>
-  </View>
+    </View>
 
 </View>
 
-    {/* Page 2 */}
-    <Page size="A4" style={styles.page}>
+</Page>   {/* ✅ ADD THIS FIX LINE HERE */}
+
+/* Page 2 */
+<Page size="A4" style={styles.page}>
       {/* Hackathons & Achievements */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Hackathons & Achievements</Text>
