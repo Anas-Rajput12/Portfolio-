@@ -488,8 +488,11 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
 
   <div className="space-y-6">
 
+    {/* AI Customer Support SaaS */}
     <div className="border-l-4 border-l-blue-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
-      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">AI Customer Support Chatbot SaaS</h4>
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">
+        AI Customer Support Chatbot SaaS
+      </h4>
       <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-3">
         Production-ready AI SaaS chatbot using GPT-4o and RAG for intelligent customer support with document-based knowledge retrieval.
       </p>
@@ -498,8 +501,11 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
       </p>
     </div>
 
+    {/* AI Todo App */}
     <div className="border-l-4 border-l-cyan-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
-      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">AI-Powered Todo App with Chatbot Assistant</h4>
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">
+        AI-Powered Todo App with Chatbot Assistant
+      </h4>
       <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-3">
         Smart task management app with AI chatbot that helps users create and organize tasks using natural language.
       </p>
@@ -508,8 +514,11 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
       </p>
     </div>
 
+    {/* Car Rental */}
     <div className="border-l-4 border-l-purple-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
-      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">Car Rental E-Commerce Platform</h4>
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">
+        Car Rental E-Commerce Platform
+      </h4>
       <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-3">
         Full-stack car rental website with real-time listings, booking system, CMS integration and modern UI.
       </p>
@@ -518,8 +527,11 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
       </p>
     </div>
 
+    {/* Physical AI Book RAG */}
     <div className="border-l-4 border-l-green-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
-      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">Physical AI Book RAG Chatbot</h4>
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">
+        Physical AI Book RAG Chatbot
+      </h4>
       <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-3">
         RAG-based AI system allowing users to query uploaded documents with context-aware GPT responses.
       </p>
@@ -528,9 +540,34 @@ Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
       </p>
     </div>
 
+    {/* Voice Assistant */}
+    <div className="border-l-4 border-l-yellow-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">
+        Voice-Based Virtual Assistant
+      </h4>
+      <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-3">
+        AI-powered assistant that uses voice recognition and NLP for real-time responses and task automation.
+      </p>
+      <p className="text-cyan-400 text-xs md:text-sm font-medium">
+        Next.js • TypeScript • Speech Recognition API • Node.js
+      </p>
+    </div>
+
+    {/* Bandage E-Commerce */}
+    <div className="border-l-4 border-l-pink-500 pl-4 md:pl-6 bg-slate-700/20 p-4 rounded-r-lg">
+      <h4 className="text-lg md:text-xl font-semibold text-gray-100 mb-2">
+        Bandage E-Commerce Website
+      </h4>
+      <p className="text-gray-400 text-sm md:text-base leading-relaxed mb-3">
+        A responsive e-commerce website with cart, authentication, and secure checkout system.
+      </p>
+      <p className="text-cyan-400 text-xs md:text-sm font-medium">
+        Next.js • Tailwind CSS • Sanity CMS • Node.js
+      </p>
+    </div>
+
   </div>
 </section>
-
 
 <section>
   <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4 flex items-center gap-2">
