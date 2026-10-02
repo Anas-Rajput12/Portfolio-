@@ -3,14 +3,15 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import {
-  SiJavascript, SiTypescript, SiPython, SiHtml5, SiCss,
-  SiReact, SiNextdotjs, SiNodedotjs, SiExpress, SiTailwindcss,
+  SiJavascript, SiTypescript, SiPython, SiHtml5, SiCss, SiCplusplus,
+  SiReact, SiExpo, SiNextdotjs, SiNodedotjs, SiExpress, SiFastapi, SiTailwindcss, SiFramer,
   SiOpenai, SiPostgresql, SiMysql, SiPrisma, SiFirebase,
   SiDocker, SiKubernetes, SiVercel, SiNetlify, SiGithubactions,
-  SiGit, SiGithub, SiFigma, SiGooglesheets
+  SiGit, SiGithub, SiFigma
 } from 'react-icons/si';
 import {
-  Database, Code2, Brain, Cloud, Briefcase, Wrench, FileSpreadsheet, FileText, Code, LayoutGrid
+  Database, Code2, Brain, Cloud, Wrench, Code, LayoutGrid,
+  Mic, Component, Terminal, Sparkles, Bot, Bot as BotIcon, Hash
 } from 'lucide-react';
 
 const skillsData = [
@@ -18,19 +19,20 @@ const skillsData = [
     category: 'All',
     icon: LayoutGrid,
     color: 'from-blue-400 to-purple-400',
-    skills: [] // Will be populated below
+    skills: [] as any[] // Will be populated below
   },
   {
     category: 'Languages',
     icon: Code2,
     color: 'from-blue-400 to-cyan-400',
     skills: [
+      { name: 'Python', icon: SiPython, color: 'text-blue-500' },
       { name: 'JavaScript', icon: SiJavascript, color: 'text-yellow-400' },
       { name: 'TypeScript', icon: SiTypescript, color: 'text-blue-400' },
-      { name: 'Python', icon: SiPython, color: 'text-blue-500' },
+      { name: 'C++', icon: SiCplusplus, color: 'text-blue-500' },
+      { name: 'C#', icon: Hash, color: 'text-purple-400' },
       { name: 'HTML', icon: SiHtml5, color: 'text-orange-500' },
       { name: 'CSS', icon: SiCss, color: 'text-blue-500' },
-      { name: 'ES6+', icon: SiJavascript, color: 'text-yellow-400' },
     ]
   },
   {
@@ -39,22 +41,28 @@ const skillsData = [
     color: 'from-green-400 to-emerald-400',
     skills: [
       { name: 'React', icon: SiReact, color: 'text-cyan-400' },
+      { name: 'React Native', icon: SiReact, color: 'text-sky-400' },
+      { name: 'Expo', icon: SiExpo, color: 'text-gray-100' },
       { name: 'Next.js', icon: SiNextdotjs, color: 'text-gray-100' },
       { name: 'Node.js', icon: SiNodedotjs, color: 'text-green-500' },
       { name: 'Express.js', icon: SiExpress, color: 'text-gray-300' },
+      { name: 'FastAPI', icon: SiFastapi, color: 'text-teal-400' },
       { name: 'Tailwind CSS', icon: SiTailwindcss, color: 'text-cyan-400' },
+      { name: 'shadcn/ui', icon: Component, color: 'text-gray-100' },
+      { name: 'Framer Motion', icon: SiFramer, color: 'text-pink-400' },
     ]
   },
   {
-    category: 'AI & Agents',
+    category: 'AI & Machine Learning',
     icon: Brain,
     color: 'from-purple-400 to-pink-400',
     skills: [
-      { name: 'OpenAI', icon: SiOpenai, color: 'text-green-400' },
-      { name: 'LLM', icon: Brain, color: 'text-purple-400' },
+      { name: 'OpenAI GPT-4o', icon: SiOpenai, color: 'text-green-400' },
+      { name: 'LLM Integration', icon: Brain, color: 'text-purple-400' },
       { name: 'NLP', icon: Brain, color: 'text-pink-400' },
       { name: 'RAG Systems', icon: Brain, color: 'text-indigo-400' },
-      { name: 'AI Automation', icon: Brain, color: 'text-purple-500' },
+      { name: 'AI Automation', icon: Bot, color: 'text-purple-500' },
+      { name: 'Speech-to-Text / Text-to-Speech', icon: Mic, color: 'text-rose-400' },
     ]
   },
   {
@@ -66,6 +74,8 @@ const skillsData = [
       { name: 'MySQL', icon: SiMysql, color: 'text-blue-500' },
       { name: 'Prisma ORM', icon: SiPrisma, color: 'text-gray-100' },
       { name: 'Firebase', icon: SiFirebase, color: 'text-yellow-400' },
+      { name: 'Neon DB', icon: Database, color: 'text-emerald-400' },
+      { name: 'Qdrant (Vector DB)', icon: Database, color: 'text-red-400' },
     ]
   },
   {
@@ -92,13 +102,14 @@ const skillsData = [
     ]
   },
   {
-    category: 'Business Tools',
-    icon: Briefcase,
+    category: 'AI-Assisted Dev',
+    icon: Sparkles,
     color: 'from-teal-400 to-cyan-400',
     skills: [
-      { name: 'MS Word', icon: FileText, color: 'text-blue-500' },
-      { name: 'MS Excel', icon: FileSpreadsheet, color: 'text-green-500' },
-      { name: 'Google Sheets', icon: SiGooglesheets, color: 'text-green-400' },
+      { name: 'Claude Code', icon: Terminal, color: 'text-orange-400' },
+      { name: 'ChatGPT', icon: SiOpenai, color: 'text-green-400' },
+      { name: 'Gemini', icon: Sparkles, color: 'text-blue-400' },
+      { name: 'Qwen', icon: BotIcon, color: 'text-purple-400' },
     ]
   }
 ];
@@ -134,7 +145,7 @@ export default function Skills() {
             Tech Stack
           </h2>
           <p className="mt-4 text-sm md:text-base lg:text-lg text-gray-400 max-w-2xl mx-auto px-4">
-            Technologies I use to ship production-ready applications — from agentic AI systems to cloud-native microservices.
+            Technologies I use to build AI-powered, production-ready applications — from RAG systems and voice-enabled assistants to scalable full-stack web and mobile apps.
           </p>
         </motion.div>
 
