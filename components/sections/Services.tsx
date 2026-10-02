@@ -14,14 +14,14 @@ import {
 const services = [
   {
     icon: Brain,
-    title: 'AI Application Development',
+    title: 'AI & RAG Application Development',
     description:
-      'Building intelligent applications powered by AI, NLP, speech technologies, and OpenAI integrations.',
+      'Building intelligent applications with OpenAI GPT-4o, LLM integration, NLP, semantic search, and document-based knowledge retrieval.',
     features: [
-      'AI Tutor Systems',
       'RAG Chatbots',
-      'Voice Assistants',
-      'OpenAI Integration',
+      'AI Tutor Systems',
+      'Voice Assistants (STT / TTS)',
+      'OpenAI GPT-4o Integration',
     ],
   },
 
@@ -29,25 +29,25 @@ const services = [
     icon: Code2,
     title: 'Full-Stack Web Development',
     description:
-      'Developing scalable web applications using modern frontend and backend technologies.',
+      'Developing scalable web applications and backend APIs using modern frontend and backend technologies.',
     features: [
       'React & Next.js',
       'TypeScript',
-      'Node.js',
-      'REST APIs',
+      'Node.js & Express.js',
+      'FastAPI & REST APIs',
     ],
   },
 
   {
     icon: Smartphone,
-    title: 'Responsive Web Design',
+    title: 'Web & Mobile App Development',
     description:
-      'Creating modern, responsive, and user-friendly interfaces that work perfectly on all devices.',
+      'Creating modern, responsive, and user-friendly interfaces for web and mobile that work smoothly on all devices.',
     features: [
+      'React Native & Expo',
       'Responsive Design',
-      'Tailwind CSS',
-      'Modern UI/UX',
-      'Cross-Browser Support',
+      'Tailwind CSS & shadcn/ui',
+      'Framer Motion Animations',
     ],
   },
 
@@ -55,12 +55,12 @@ const services = [
     icon: Database,
     title: 'Database Solutions',
     description:
-      'Designing efficient database structures and integrating reliable data management solutions.',
+      'Designing efficient database structures and integrating relational, cloud, and vector databases for reliable data management.',
     features: [
-      'PostgreSQL',
-      'MySQL',
+      'PostgreSQL & MySQL',
       'Prisma ORM',
-      'Database Integration',
+      'Neon DB & Firebase',
+      'Qdrant Vector DB',
     ],
   },
 
@@ -70,23 +70,23 @@ const services = [
     description:
       'Deploying and managing applications using modern cloud platforms and containerized environments.',
     features: [
-      'Vercel Deployment',
+      'Vercel & Netlify Deployment',
       'Docker',
       'Kubernetes',
-      'GitHub Actions',
+      'GitHub Actions CI/CD',
     ],
   },
 
   {
     icon: Zap,
-    title: 'Automation & API Integration',
+    title: 'AI Automation & API Integration',
     description:
-      'Connecting services, automating workflows, and integrating third-party APIs for business efficiency.',
+      'Connecting services, automating workflows with AI, and integrating third-party APIs to improve efficiency.',
     features: [
+      'AI Automation',
       'API Integration',
       'Workflow Automation',
-      'AI Assistants',
-      'Business Solutions',
+      'Smart AI Assistants',
     ],
   },
 ];
@@ -122,9 +122,9 @@ export default function Services() {
           </h2>
 
           <p className="max-w-3xl mx-auto text-lg text-gray-400">
-            I help businesses and startups build modern web applications,
-            AI-powered solutions, automation systems, and scalable digital
-            products using the latest technologies.
+            I help businesses and startups build AI-powered solutions, RAG
+            chatbots, voice-enabled systems, and scalable web and mobile
+            applications using modern technologies.
           </p>
         </motion.div>
 
@@ -189,16 +189,16 @@ export default function Services() {
           </h3>
 
           <p className="text-gray-400 max-w-2xl mx-auto mb-8">
-            Whether you need an AI-powered application, a modern website,
-            automation system, or a custom software solution, I'm here to help
-            turn your ideas into reality.
+            Whether you need an AI chatbot, a voice-enabled assistant, a
+            full-stack web or mobile app, or an automation system, I&apos;m here
+            to help turn your ideas into reality.
           </p>
 
           <a
             href="#contact"
             className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all duration-300 hover:shadow-blue-500/30"
           >
-            Let's Work Together
+            Let&apos;s Work Together
           </a>
         </motion.div>
       </div>
