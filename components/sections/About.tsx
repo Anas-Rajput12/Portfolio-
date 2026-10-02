@@ -10,25 +10,25 @@ export default function About() {
       icon: Code2,
       title: 'Full-Stack Development',
       description:
-        'Building scalable web applications using React, Next.js, TypeScript, Node.js, PostgreSQL, and modern development practices.',
+        'Building scalable web and mobile applications using React, React Native, Next.js, TypeScript, Node.js, Express.js, FastAPI, and PostgreSQL.',
     },
     {
       icon: Brain,
-      title: 'Artificial Intelligence',
+      title: 'AI & Machine Learning',
       description:
-        'Developing AI-powered applications including AI Tutors, RAG chatbots, virtual assistants, NLP systems, and automation tools.',
+        'Developing RAG-powered chatbots, AI tutors, voice-enabled assistants, and automation tools with OpenAI GPT-4o, LLM integration, NLP, and speech-to-text / text-to-speech.',
     },
     {
       icon: Rocket,
-      title: 'Cloud & Deployment',
+      title: 'Cloud & DevOps',
       description:
-        'Deploying modern applications using Docker, Kubernetes, Vercel, GitHub, and cloud-native technologies.',
+        'Deploying modern applications using Docker, Kubernetes, Vercel, Netlify, and GitHub Actions for smooth CI/CD workflows.',
     },
     {
       icon: Heart,
       title: 'Problem Solver',
       description:
-        'Passionate about solving real-world problems through innovative software solutions and user-focused design.',
+        'Passionate about solving real-world development problems through practical, user-centric software solutions.',
     },
   ];
 
@@ -58,8 +58,8 @@ export default function About() {
           </h2>
 
           <p className="text-lg text-gray-400 max-w-3xl mx-auto">
-            AI & Full-Stack Developer focused on building intelligent,
-            scalable, and impactful digital solutions.
+            AI & Full-Stack Developer specializing in intelligent systems,
+            RAG, AI chatbots, and scalable web and mobile applications.
           </p>
         </motion.div>
 
@@ -81,35 +81,39 @@ export default function About() {
               </p>
 
               <p className="text-gray-400 mb-6">
-                📍 Nawabshah, Pakistan
+                📍 Karachi, Sindh, Pakistan
               </p>
 
               <div className="space-y-5 text-gray-300 leading-relaxed">
                 <p>
-                  I am a passionate AI & Full-Stack Developer with hands-on
-                  experience in developing modern web applications,
-                  AI-powered platforms, automation systems, and intelligent
-                  virtual assistants.
+                  I am an AI & Full-Stack Developer experienced in building
+                  AI-powered solutions using LLM integration, document-based
+                  knowledge retrieval, semantic search, backend APIs,
+                  responsive interfaces, and voice-enabled systems.
                 </p>
 
                 <p>
-                  My expertise includes React, Next.js, TypeScript,
-                  JavaScript, Node.js, Python, PostgreSQL, MySQL, Docker,
-                  Kubernetes, and cloud deployment technologies.
+                  My stack includes React, React Native, Next.js, Node.js,
+                  FastAPI, Python, TypeScript, PostgreSQL, Prisma ORM, Neon DB,
+                  and Qdrant as a vector database, along with Docker,
+                  Kubernetes, and cloud deployment on Vercel and Netlify.
                 </p>
 
                 <p>
-                  During my academic and professional journey, I have built
-                  projects such as AI Tutor Systems, Voice-Enabled Virtual
-                  Assistants, E-Commerce Platforms, and AI Automation
-                  Solutions that improve productivity and user experience.
+                  I have worked as an AI Developer building a real-time AI
+                  tutor with speech-to-text and text-to-speech, and as a Web
+                  Developer Intern building responsive client projects. My
+                  projects include an AI customer support SaaS chatbot with
+                  GPT-4o and RAG, a Physical AI book with a RAG-powered
+                  chatbot, an AI-powered todo app, a voice-based virtual
+                  assistant, and a car rental e-commerce platform.
                 </p>
 
                 <p>
-                  I enjoy transforming innovative ideas into real-world
-                  applications and continuously learning emerging
-                  technologies in Artificial Intelligence, Software
-                  Engineering, and Cloud Computing.
+                  I hold a Bachelor in Information Technology from Quaid-e-Awam
+                  University of Engineering, Science & Technology, and I enjoy
+                  turning ideas into practical, user-centric applications while
+                  continuously learning new AI technologies.
                 </p>
               </div>
 
@@ -117,16 +121,16 @@ export default function About() {
               <div className="grid grid-cols-2 gap-6 mt-8">
                 <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 backdrop-blur-sm">
                   <h4 className="text-3xl font-bold text-blue-400">
-                    10+
+                    5+
                   </h4>
                   <p className="text-gray-400">
-                    Projects Built
+                    Key Projects Built
                   </p>
                 </div>
 
                 <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 backdrop-blur-sm">
                   <h4 className="text-3xl font-bold text-blue-400">
-                    2+
+                    2
                   </h4>
                   <p className="text-gray-400">
                     Professional Roles
@@ -154,9 +158,9 @@ export default function About() {
                     </h4>
 
                     <p className="text-gray-400">
-                      Creating intelligent applications that combine
-                      modern web technologies with Artificial Intelligence
-                      to deliver meaningful user experiences.
+                      Creating RAG chatbots, voice assistants, and full-stack
+                      applications that combine modern web technologies with
+                      AI to deliver meaningful user experiences.
                     </p>
                   </div>
                 </div>
