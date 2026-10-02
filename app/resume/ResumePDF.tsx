@@ -1,430 +1,326 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Link } from '@react-pdf/renderer';
 
-// Create styles for PDF with professional design
+const NAVY = '#1F3A5F';
+const ACCENT = '#2563EB';
+const TEXT = '#222222';
+const MUTED = '#5A6472';
+
+// NOTE: Helvetica has no weight/style variants in react-pdf, so bold & italic
+// must use the dedicated font names (Helvetica-Bold / Helvetica-Oblique).
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
+    paddingTop: 36,
+    paddingBottom: 44,
+    paddingHorizontal: 42,
     backgroundColor: '#ffffff',
     fontFamily: 'Helvetica',
-  },
-  header: {
-    marginBottom: 25,
-    textAlign: 'center',
-    borderBottom: '3 solid #2563eb',
-    paddingBottom: 18,
-  },
-  name: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
-    marginBottom: 10,
-  },
-  title: {
-    fontSize: 18,
-    color: '#2563eb',
-    marginBottom: 12,
-  },
-  contactContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginTop: 12,
-  },
-  contactItem: {
-    fontSize: 10,
-    color: '#4a4a4a',
-    marginHorizontal: 5,
-  },
-  section: {
-    marginTop: 20,
-    marginBottom: 15,
-  },
-  sectionTitle: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
-    marginBottom: 12,
-    borderBottom: '2 solid #d1d5db',
-    paddingBottom: 6,
-  },
-  text: {
-    fontSize: 10,
-    color: '#4a4a4a',
-    lineHeight: 1.6,
-    marginBottom: 8,
-  },
-  skillsGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 12,
-  },
-  skillItem: {
-    width: '48%',
-    marginBottom: 2,
-  },
-  skillLabel: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    color: '#2563eb',
-    marginBottom: 4,
-  },
-  skillValue: {
-    fontSize: 10,
-    color: '#4a4a4a',
+    fontSize: 9.2,
+    color: TEXT,
     lineHeight: 1.4,
   },
-  projectItem: {
-    marginBottom: 16,
-    paddingLeft: 12,
-    borderLeft: '4 solid #2563eb',
-  },
-  projectTitle: {
-    fontSize: 10,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
+
+  // Header
+  header: { alignItems: 'center', marginBottom: 6 },
+  name: { fontFamily: 'Helvetica-Bold', fontSize: 24, color: NAVY, letterSpacing: 0.5 },
+  title: { fontSize: 11.5, color: ACCENT, marginTop: 3 },
+  contactRow: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', marginTop: 5 },
+  contactText: { fontSize: 8.8, color: MUTED },
+  link: { color: ACCENT, textDecoration: 'none' },
+
+  // Sections
+  sectionTitle: {
+    fontFamily: 'Helvetica-Bold',
+    fontSize: 10.5,
+    color: NAVY,
+    textTransform: 'uppercase',
+    marginTop: 12,
     marginBottom: 5,
+    paddingBottom: 2,
+    borderBottomWidth: 1,
+    borderBottomColor: NAVY,
+    borderBottomStyle: 'solid',
   },
-  projectDesc: {
-    fontSize: 9,
-    color: '#4a4a4a',
-    marginBottom: 6,
-    lineHeight: 1.5,
-  },
-  projectTech: {
-    fontSize: 10,
-    color: '#2563eb',
-    fontStyle: 'italic',
-  },
-  achievementItem: {
-    marginBottom: 12,
-    paddingLeft: 12,
-    borderLeft: '3 solid #22d3ee',
-  },
-  achievementTitle: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
-    marginBottom: 4,
-  },
-  achievementBadge: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    color: '#2563eb',
-    marginBottom: 3,
-  },
-  achievementDetail: {
-    fontSize: 10,
-    color: '#4a4a4a',
-  },
-  link: {
-    color: '#2563eb',
-    textDecoration: 'none',
-  },
-  educationItem: {
-    marginBottom: 8,
-  },
-  educationTitle: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: '#1a1a1a',
-    marginBottom: 4,
-  },
-  educationSchool: {
-    fontSize: 10,
-    color: '#4a4a4a',
-    marginBottom: 3,
-  },
-  educationYear: {
-    fontSize: 10,
-    color: '#2563eb',
+
+  // Generic
+  paragraph: { fontSize: 9.2, color: TEXT },
+  rowBetween: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' },
+  itemTitle: { fontFamily: 'Helvetica-Bold', fontSize: 9.8, color: TEXT },
+  itemDate: { fontSize: 8.8, color: MUTED },
+  company: { fontFamily: 'Helvetica-Bold', color: ACCENT },
+  tech: { fontFamily: 'Helvetica-Oblique', fontSize: 8.6, color: ACCENT, marginBottom: 2 },
+  item: { marginBottom: 7 },
+
+  // Bullets
+  bulletRow: { flexDirection: 'row', marginBottom: 1.5, paddingLeft: 2 },
+  bulletDot: { width: 9 },
+  bulletText: { flex: 1 },
+
+  // Skills
+  skillRow: { flexDirection: 'row', marginBottom: 3 },
+  skillLabel: { width: 128, fontFamily: 'Helvetica-Bold' },
+  skillValue: { flex: 1 },
+
+  // Footer
+  footer: {
+    position: 'absolute',
+    bottom: 18,
+    left: 42,
+    right: 42,
+    textAlign: 'center',
+    fontSize: 7.5,
+    color: MUTED,
   },
 });
 
+/* ---------- Data ---------- */
+
+const skills = [
+  ['Programming Languages', 'Python, JavaScript, TypeScript, C++, C#'],
+  ['Frameworks & Libraries', 'React, React Native, Expo, Next.js, Node.js, Express.js, FastAPI, Tailwind CSS, shadcn/ui, Framer Motion'],
+  ['AI & Machine Learning', 'OpenAI GPT-4o, LLM Integration, NLP, RAG Systems, AI Automation, Speech-to-Text / Text-to-Speech'],
+  ['Databases', 'PostgreSQL, MySQL, Prisma ORM, Firebase, Neon DB, Qdrant (Vector DB)'],
+  ['Cloud & DevOps', 'Docker, Kubernetes, Vercel, Netlify, GitHub Actions'],
+  ['Tools & Platforms', 'Git, GitHub, VS Code, Figma'],
+  ['AI-Assisted Development', 'Claude Code, ChatGPT, Gemini, Qwen (coding assistance, debugging, workflow optimization)'],
+];
+
+const experience = [
+  {
+    role: 'AI Developer',
+    company: 'UK-Based Company',
+    date: 'Feb 2026 – Apr 2026 | Remote',
+    points: [
+      'Developed an AI-powered tutor system delivering real-time, interactive learning support.',
+      'Integrated speech-to-text and text-to-speech APIs to enable seamless voice-based communication.',
+      'Focused on building intelligent AI systems for education and automation use cases.',
+    ],
+  },
+  {
+    role: 'Web Developer Intern',
+    company: 'High Tech Software House',
+    date: 'Jul 2025 – Aug 2025 | Nawabshah, Pakistan',
+    points: [
+      'Developed responsive web applications using HTML, CSS, JavaScript, React, and Next.js.',
+      'Collaborated with senior developers on client-based projects to deliver high-performance solutions.',
+      'Improved UI/UX using modern responsive design principles; gained hands-on experience with Git and Agile workflows.',
+    ],
+  },
+];
+
+const projects = [
+  {
+    title: 'AquaTrace – AI-Powered Water Monitoring & Incident Detection',
+    github: 'https://github.com/Anas-Rajput12/Hackathon-Project',
+    live: 'https://hackathon-project-theta-brown.vercel.app/',
+    stack: 'Next.js, TypeScript, FastAPI, Python, PostgreSQL, Tailwind CSS, Google Earth Engine, Sentinel-2',
+    points: [
+      'Built an AI-powered platform for structured incident reporting, evidence collection, and geographic context for water-related incidents.',
+      'Combined AI-assisted risk analysis and geospatial analysis with accountable workflows that turn field observations into actionable case records.',
+    ],
+  },
+  {
+    title: 'ApplyAI – AI-Powered Career & Job Application Workspace',
+    github: 'https://github.com/Anas-Rajput12/Apply-Job',
+    live: 'https://apply-job-z2af.vercel.app/',
+    stack: 'Next.js, React Native, Expo, FastAPI, Python, PostgreSQL, LLM, REST API',
+    points: [
+      'Built a web and mobile workspace to analyze job descriptions, tailor applications, and track the full application workflow.',
+      'Implemented resume upload and editing with AI-powered job matching and career assistance.',
+    ],
+  },
+  {
+    title: 'AI Customer Support Chatbot (SaaS)',
+    github: 'https://github.com/Anas-Rajput12/Ai-Project',
+    live: 'https://ai-project-one-pi.vercel.app/',
+    stack: 'Next.js 15, TypeScript, OpenAI GPT-4o, Prisma ORM, PostgreSQL, NextAuth, Tailwind CSS, shadcn/ui',
+    points: [
+      'Built a production-ready SaaS chatbot using GPT-4o and RAG for context-aware support from PDFs, URLs, and text.',
+      'Designed a scalable architecture with authentication, role-based access, and an analytics dashboard.',
+    ],
+  },
+  {
+    title: 'Physical AI Book with RAG-Powered Chatbot',
+    github: 'https://github.com/Anas-Rajput12/Physical-AI',
+    live: 'https://physical-ai-eight.vercel.app/',
+    stack: 'Docusaurus, Qdrant, Neon DB, FastAPI',
+    points: [
+      'Developed a RAG-based system enabling users to query book content with context-aware, semantic search responses.',
+      'Implemented vector database integration for accurate, relevant information retrieval.',
+    ],
+  },
+  {
+    title: 'AI-Powered Todo App with Chatbot Assistant',
+    github: 'https://github.com/Anas-Rajput12/Todo-App',
+    live: 'https://todo-app-xmj8.vercel.app/',
+    stack: 'Next.js, FastAPI, Better Auth, Neon DB',
+    points: [
+      'Built a task management app with an AI chatbot to create, organize, and manage tasks using natural language.',
+    ],
+  },
+  {
+    title: 'Voice-Based Virtual Assistant (Final Year Project)',
+    github: 'https://github.com/Anas-Rajput12/Final-Year-Project',
+    live: 'https://final-year-projects-five.vercel.app/',
+    stack: 'Next.js, TypeScript, Speech Recognition API, Node.js, Firebase',
+    points: [
+      'Designed a voice-enabled assistant to support students’ academic needs with task automation and real-time responses.',
+      'Integrated NLP and speech recognition for multilingual interaction.',
+    ],
+  },
+  {
+    title: 'Car Rental Platform',
+    github: 'https://github.com/Anas-Rajput12/Hackathon-quarter2',
+    live: 'https://project-rust-pi.vercel.app/',
+    stack: 'React, Node.js, MongoDB, Sanity CMS',
+    points: [
+      'Built a full-stack car rental platform with real-time vehicle listings, a booking system, and a responsive UI.',
+    ],
+  },
+  {
+    title: 'Bandage E-Commerce Website',
+    github: 'https://github.com/Anas-Rajput12/E-commerce-Website',
+    live: 'https://e-commerce-website-pi-six-88.vercel.app/',
+    stack: 'Next.js, Tailwind CSS, Sanity CMS, Node.js, MongoDB',
+    points: [
+      'Built a responsive e-commerce site with product listings, cart, authentication, and a secure checkout workflow.',
+    ],
+  },
+];
+
+/* ---------- Small helpers ---------- */
+
+const Bullets = ({ items }: { items: string[] }) => (
+  <>
+    {items.map((point, i) => (
+      <View key={i} style={styles.bulletRow}>
+        <Text style={styles.bulletDot}>•</Text>
+        <Text style={styles.bulletText}>{point}</Text>
+      </View>
+    ))}
+  </>
+);
+
+const Section = ({ title }: { title: string }) => (
+  // minPresenceAhead keeps a heading from being stranded at the bottom of a page
+  <Text style={styles.sectionTitle} minPresenceAhead={60}>
+    {title}
+  </Text>
+);
+
+const Dot = () => <Text style={styles.contactText}>{'  |  '}</Text>;
+
+/* ---------- Document ---------- */
+
 export const ResumePDF = () => (
-  <Document>
-    {/* Page 1 */}
+  <Document title="Muhammad Anas Qadri - CV" author="Muhammad Anas Qadri">
     <Page size="A4" style={styles.page}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.name}>Muhammad Anas Qadri</Text>
-        <Text style={styles.title}>AI & Full Stack Developer</Text>
-        <View style={styles.contactContainer}>
-          <Text style={styles.contactItem}>muhammadanasqadri2@gmail.com</Text>
-          <Text style={styles.contactItem}>•</Text>
-          <Link src="https://portfolio12-iota-orcin.vercel.app/" style={[styles.contactItem, styles.link]}>
-            portfolio12-iota-orcin.vercel.app
+        <Text style={styles.name}>MUHAMMAD ANAS QADRI</Text>
+        <Text style={styles.title}>AI & Full-Stack Developer</Text>
+
+        <View style={styles.contactRow}>
+          <Text style={styles.contactText}>Karachi, Sindh, Pakistan</Text>
+          <Dot />
+          <Text style={styles.contactText}>+92 313 3305615</Text>
+          <Dot />
+          <Link src="mailto:muhammadanasqadri2@gmail.com" style={[styles.contactText, styles.link]}>
+            muhammadanasqadri2@gmail.com
           </Link>
-          <Text style={styles.contactItem}>•</Text>
-          <Link src="https://www.linkedin.com/in/muhammad-anas-qadri-a7608a2b7/" style={[styles.contactItem, styles.link]}>
+        </View>
+
+        <View style={styles.contactRow}>
+          <Link src="https://www.linkedin.com/in/muhammad-anas-qadri-a7608a2b7/" style={[styles.contactText, styles.link]}>
             LinkedIn
           </Link>
-          <Text style={styles.contactItem}>•</Text>
-          <Link src="https://github.com/Anas-Rajput12" style={[styles.contactItem, styles.link]}>
+          <Dot />
+          <Link src="https://github.com/Anas-Rajput12" style={[styles.contactText, styles.link]}>
             GitHub
+          </Link>
+          <Dot />
+          <Link src="https://portfolio12-iota-orcin.vercel.app/" style={[styles.contactText, styles.link]}>
+            Portfolio
+          </Link>
+          <Dot />
+          <Link src="https://x.com/MuhammadAnasQ17" style={[styles.contactText, styles.link]}>
+            X (Twitter)
           </Link>
         </View>
       </View>
 
-      {/* Professional Summary */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Professional Summary</Text>
-        <Text style={styles.text}>
-          AI & Full Stack Developer specializing in intelligent systems, RAG chatbots, and scalable web applications.
-          Building the future with code and AI. Experienced in developing production-ready AI applications with modern
-          web technologies, focusing on creating intelligent, user-centric solutions that drive business value.
+      {/* Summary */}
+      <Section title="Professional Summary" />
+      <Text style={styles.paragraph}>
+        AI & Full-Stack Developer specializing in intelligent systems, RAG (Retrieval-Augmented Generation), AI
+        chatbots, and scalable web and mobile applications. Experienced in LLM integration, document-based knowledge
+        retrieval, semantic search, backend APIs, responsive interfaces, and voice-enabled systems. Skilled in React,
+        React Native, Next.js, Node.js, FastAPI, Python, and PostgreSQL, with a strong focus on practical,
+        user-centric solutions to real-world problems.
+      </Text>
+
+      {/* Skills */}
+      <Section title="Core Skills" />
+      {skills.map(([label, value]) => (
+        <View key={label} style={styles.skillRow} wrap={false}>
+          <Text style={styles.skillLabel}>{label}</Text>
+          <Text style={styles.skillValue}>{value}</Text>
+        </View>
+      ))}
+
+      {/* Experience */}
+      <Section title="Professional Experience" />
+      {experience.map((job) => (
+        <View key={job.role} style={styles.item} wrap={false}>
+          <View style={styles.rowBetween}>
+            <Text style={styles.itemTitle}>
+              {job.role}  |  <Text style={styles.company}>{job.company}</Text>
+            </Text>
+            <Text style={styles.itemDate}>{job.date}</Text>
+          </View>
+          <Bullets items={job.points} />
+        </View>
+      ))}
+
+      {/* Projects */}
+      <Section title="Key Projects" />
+      {projects.map((p) => (
+        <View key={p.title} style={styles.item} wrap={false}>
+          <View style={styles.rowBetween}>
+            <Text style={styles.itemTitle}>{p.title}</Text>
+            <Text style={styles.itemDate}>
+              <Link src={p.github} style={styles.link}>GitHub</Link>
+              {'  |  '}
+              <Link src={p.live} style={styles.link}>Live Demo</Link>
+            </Text>
+          </View>
+          <Text style={styles.tech}>{p.stack}</Text>
+          <Bullets items={p.points} />
+        </View>
+      ))}
+
+      {/* Education */}
+      <Section title="Education" />
+      <View style={styles.item} wrap={false}>
+        <View style={styles.rowBetween}>
+          <Text style={styles.itemTitle}>Bachelor in Information Technology</Text>
+          <Text style={styles.itemDate}>2021 – 2025</Text>
+        </View>
+        <Text style={styles.paragraph}>
+          Quaid-e-Awam University of Engineering, Science & Technology, Nawabshah
         </Text>
       </View>
 
-      {/* Technical Skills */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Technical Skills</Text>
-        <View style={styles.skillsGrid}>
-          <View style={styles.skillItem}>
-            <Text style={styles.skillLabel}>Languages</Text>
-            <Text style={styles.skillValue}>JavaScript, TypeScript, Python, HTML, CSS, ES6+</Text>
-          </View>
-          <View style={styles.skillItem}>
-            <Text style={styles.skillLabel}>Frameworks & Libraries</Text>
-            <Text style={styles.skillValue}>React, Next.js, Node.js, Express.js, Tailwind CSS</Text>
-          </View>
-          <View style={styles.skillItem}>
-            <Text style={styles.skillLabel}>AI & Machine Learning</Text>
-            <Text style={styles.skillValue}>OpenAI, LLM, NLP, RAG Systems, AI Automation</Text>
-          </View>
-          <View style={styles.skillItem}>
-            <Text style={styles.skillLabel}>Databases</Text>
-            <Text style={styles.skillValue}>PostgreSQL, MySQL, Prisma ORM, Firebase</Text>
-          </View>
-          <View style={styles.skillItem}>
-            <Text style={styles.skillLabel}>Cloud & DevOps</Text>
-            <Text style={styles.skillValue}>Docker, Kubernetes, Vercel, Netlify, GitHub Actions</Text>
-          </View>
-          <View style={styles.skillItem}>
-            <Text style={styles.skillLabel}>Tools & Platforms</Text>
-            <Text style={styles.skillValue}>Git, GitHub, VS Code, Figma</Text>
-          </View>
-        </View>
-      </View>
-
-      {/* Experience */}
-<View style={styles.section}>
-  <Text style={styles.sectionTitle}>Experience</Text>
-
-  {/* Web Developer Intern */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      Web Developer Intern – High Tech Software House
-    </Text>
-    <Text style={styles.projectTech}>
-      07/2025 – 08/2025 • Nawabshah
-    </Text>
-    <Text style={styles.text}>
-      Developed responsive web applications using HTML, CSS, JavaScript, React, and Next.js. 
-      Collaborated with senior developers on client-based projects to deliver high-performance solutions. 
-      Improved UI/UX using modern responsive design principles and gained hands-on experience in Git and Agile workflows.
-    </Text>
-  </View>
-
-  {/* AI Developer */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      AI Developer – UK-Based Company (Remote)
-    </Text>
-    <Text style={styles.projectTech}>
-      02/2026 – 04/2026 • Remote
-    </Text>
-    <Text style={styles.text}>
-      Developed an AI-powered tutor system with real-time interaction. 
-      Integrated speech-to-text and text-to-speech APIs for voice-based communication. 
-      Focused on building intelligent AI systems for education and automation.
-    </Text>
-  </View>
-
-  {/* Hackathon Project */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      Hackathon Project – E-Commerce Platform
-    </Text>
-    <Text style={styles.projectTech}>
-      12/2024 – 01/2025 • GIAIC, Karachi
-    </Text>
-    <Text style={styles.text}>
-      Built a responsive e-commerce platform with modern UI/UX design and optimized performance. 
-      Worked in a fast-paced hackathon environment focusing on teamwork and problem-solving.
-    </Text>
-  </View>
-
-  {/* Final Year Project */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      Final Year Project – Voice-Based Virtual Assistant
-    </Text>
-    <Text style={styles.projectTech}>
-      11/2024 – 08/2025 • QUEST Nawabshah
-    </Text>
-    <Text style={styles.text}>
-      Designed and developed a voice-enabled virtual assistant to support students’ academic needs. 
-      Integrated NLP and speech recognition for multilingual interaction and automated response system.
-    </Text>
-  </View>
-
-</View>
-
-      {/* Featured Projects */}
-      {/* PROJECTS */}
-<View style={styles.section}>
-  <Text style={styles.sectionTitle}>Featured Projects</Text>
-
-  {/* AI Customer Support Chatbot SaaS */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      AI Customer Support Chatbot SaaS
-    </Text>
-    <Text style={styles.projectDesc}>
-      AI-powered SaaS chatbot using GPT-4o and RAG for intelligent customer support with document-based knowledge retrieval.
-      Built scalable architecture with authentication and database integration.
-    </Text>
-    <Text style={styles.projectTech}>
-      Next.js 15 • TypeScript • OpenAI GPT-4o • Prisma ORM • PostgreSQL • NextAuth
-    </Text>
-  </View>
-
-  {/* AI Todo App */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      AI-Powered Todo App with Chatbot Assistant
-    </Text>
-    <Text style={styles.projectDesc}>
-      Smart task management application with AI chatbot that helps users create, organize, and manage tasks using natural language processing.
-    </Text>
-    <Text style={styles.projectTech}>
-      Next.js • FastAPI • Better Auth • Neon DB
-    </Text>
-  </View>
-
-  {/* Physical AI Book RAG */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      Physical AI Book with RAG-Powered Chatbot
-    </Text>
-    <Text style={styles.projectDesc}>
-      Intelligent AI system that allows users to interact with book content using Retrieval-Augmented Generation (RAG) and semantic search.
-    </Text>
-    <Text style={styles.projectTech}>
-      Docusaurus • Qdrant • NeonDB • FastAPI
-    </Text>
-  </View>
-
-  {/* Car Rental */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      Car Rental Website
-    </Text>
-    <Text style={styles.projectDesc}>
-      Full-stack car rental platform with real-time vehicle listings, booking system, and modern responsive UI.
-    </Text>
-    <Text style={styles.projectTech}>
-      React • Sanity CMS • Node.js • MongoDB
-    </Text>
-  </View>
-
-  {/* Voice Assistant */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      Voice-Based Virtual Assistant
-    </Text>
-    <Text style={styles.projectDesc}>
-      AI-powered assistant using speech recognition and NLP for real-time responses and task automation for students.
-    </Text>
-    <Text style={styles.projectTech}>
-      Next.js • TypeScript • Speech Recognition API • Node.js
-    </Text>
-  </View>
-
-  {/* E-Commerce */}
-  <View style={styles.projectItem}>
-    <Text style={styles.projectTitle}>
-      Bandage E-Commerce Website
-    </Text>
-    <Text style={styles.projectDesc}>
-      Responsive e-commerce website with cart system, authentication, and secure checkout functionality.
-    </Text>
-    <Text style={styles.projectTech}>
-      Next.js • Tailwind CSS • Sanity CMS • Node.js
-    </Text>
-    </View>
-
-</View>
-
-</Page>   {/* ✅ ADD THIS FIX LINE HERE */}
-
-/* Page 2 */
-<Page size="A4" style={styles.page}>
-      {/* Hackathons & Achievements */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Hackathons & Achievements</Text>
-
-        <View style={styles.achievementItem}>
-          <Text style={styles.achievementTitle}>AI Customer Support Chatbot SaaS</Text>
-          <Text style={styles.achievementDetail}>2026 • Solo Project</Text>
-          <Text style={styles.text}>
-            Built a production-ready AI SaaS chatbot using GPT-4o and RAG for intelligent customer support.
-            Demonstrated expertise in AI integration, scalable architecture, and user experience design.
-          </Text>
-        </View>
-
-        <View style={styles.achievementItem}>
-          <Text style={styles.achievementTitle}>AI-Powered Todo App with Chatbot Assistant</Text>
-          <Text style={styles.achievementDetail}>2025 • Solo Project</Text>
-          <Text style={styles.text}>
-            Developed an intelligent task management application with natural language processing capabilities.
-            Showcased skills in AI integration and modern web development frameworks.
-          </Text>
-        </View>
-
-        <View style={styles.achievementItem}>
-          <Text style={styles.achievementTitle}>Car Rental E-Commerce Platform</Text>
-          <Text style={styles.achievementDetail}>2024 • Solo Project</Text>
-          <Text style={styles.text}>
-            Created a comprehensive full-stack e-commerce solution with real-time features.
-            Demonstrated proficiency in React, backend development, and CMS integration.
-          </Text>
-        </View>
-
-        <View style={styles.achievementItem}>
-          <Text style={styles.achievementTitle}>Physical AI Book RAG Chatbot</Text>
-          <Text style={styles.achievementDetail}>2025 • Solo Project</Text>
-          <Text style={styles.text}>
-            Developed a RAG-based AI system for document querying with context-aware GPT responses.
-            Implemented vector database integration and semantic search capabilities.
-          </Text>
-        </View>
-      </View>
-
-      {/* Education */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Education</Text>
-        <View style={styles.educationItem}>
-          <Text style={styles.educationTitle}>Bachelor in Information Technology</Text>
-          <Text style={styles.educationSchool}>
-            Quaid-e-Awam University of Engineering, Science & Technology Nawabshah
-          </Text>
-          <Text style={styles.educationYear}>2021 - 2025</Text>
-        </View>
-      </View>
-
-      {/* Contact Information */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Contact Information</Text>
-        <Text style={styles.text}>Email: muhammadanasqadri2@gmail.com</Text>
-        <Text style={styles.text}>Portfolio: https://portfolio12-iota-orcin.vercel.app/</Text>
-        <Text style={styles.text}>LinkedIn: https://www.linkedin.com/in/muhammad-anas-qadri-a7608a2b7</Text>
-        <Text style={styles.text}>GitHub: https://github.com/Anas-Rajput12</Text>
-        <Text style={styles.text}>Twitter: https://x.com/MuhammadAnasQ17</Text>
-        <Text style={styles.text}>Location: Pakistan</Text>
-      </View>
+      {/* Footer with page numbers */}
+      <Text
+        style={styles.footer}
+        fixed
+        render={({ pageNumber, totalPages }) =>
+          `Muhammad Anas Qadri  |  Page ${pageNumber} of ${totalPages}`
+        }
+      />
     </Page>
   </Document>
 );
+
+export default ResumePDF;
