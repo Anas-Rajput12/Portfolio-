@@ -3,34 +3,35 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Download, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { Download, ExternalLink } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import Image from "next/image";
 
+const fullText =
+  'AI & Full-Stack Developer building intelligent systems — RAG chatbots, voice-enabled assistants and scalable web & mobile apps. LLM integration. Semantic search. Practical, user-centric solutions.';
+
+const professionalRoles = [
+  'AI & Full-Stack Developer',
+  'RAG Chatbot Developer',
+  'Voice AI Developer',
+  'LLM Integration Engineer',
+  'AI Automation Developer',
+  'Next.js Developer',
+  'React Native Developer',
+  'FastAPI & Node.js Backend Developer',
+];
+
+const roles = [
+  'AI & Full-Stack Developer',
+  'RAG & Chatbot Developer',
+  'Voice AI Developer',
+  'Web & Mobile App Developer',
+];
 
 export default function Hero() {
   const [displayedText, setDisplayedText] = useState('');
   const [currentRole, setCurrentRole] = useState(0);
   const [githubRepos, setGithubRepos] = useState<number | null>(null);
-
-  const fullText = 'Building production-grade web applications and scalable systems — from e-commerce platforms to enterprise solutions. Modern stack. Clean code. Zero compromises.';
-
-  const professionalRoles = [
-  'AI & Full-Stack Developer',
-  'Agentic AI Developer',
-  'AI Automation Engineer',
-  'Full Stack Developer',
-  'Frontend Engineer',
-  'Backend Developer',
-  'Next.js Developer',
-  'API Developer',
-  'Cloud Solutions Engineer',
-  'Database Specialist',
-  'RAG Chatbot Developer',
-  'Voice AI Developer',
-  'NLP Engineer',
-  'Web Application Developer',
-];
 
   // Typing effect for description
   useEffect(() => {
@@ -60,15 +61,17 @@ export default function Hero() {
   useEffect(() => {
     fetch('https://api.github.com/users/Anas-Rajput12')
       .then(res => res.json())
-      .then(data => setGithubRepos(data.public_repos))
-      .catch(() => setGithubRepos(50)); // Fallback value
+      .then(data =>
+        setGithubRepos(typeof data.public_repos === 'number' ? data.public_repos : 70)
+      )
+      .catch(() => setGithubRepos(70)); // Fallback value
   }, []);
 
-  const roles = [
-    'Full Stack Engineer',
-    'Frontend Architect',
-    'Backend Developer',
-    'UI/UX Designer',
+  const stats = [
+    { value: githubRepos !== null ? `${githubRepos}+` : '...', label: 'GitHub Repos' },
+    { value: '5+', label: 'AI & Full-Stack Projects' },
+    { value: '2', label: 'Professional Roles' },
+    { value: 'BIT', label: 'Graduate · 2025' },
   ];
 
   return (
@@ -102,17 +105,6 @@ export default function Hero() {
                 </div>
               </motion.div>
 
-              {/* Location */}
-              {/* <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="flex items-center gap-2 mb-6 text-gray-400"
-              >
-                <MapPin className="w-4 h-4" />
-                <span className="text-sm">Pakistan · Remote</span>
-              </motion.div> */}
-
               {/* Main Heading */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -121,7 +113,7 @@ export default function Hero() {
                 className="mb-4"
               >
                 <h1 className="text-4xl md:text-6xl font-bold mb-2">
-                  <span className="text-gray-400">Hi, I'm </span>
+                  <span className="text-gray-400">Hi, I&apos;m </span>
                   <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
                     M. Anas Qadri
                   </span>
@@ -140,7 +132,6 @@ export default function Hero() {
                     key={currentRole}
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
                     transition={{ duration: 0.5 }}
                     className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
                   >
@@ -194,33 +185,17 @@ export default function Hero() {
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
               >
-                <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 backdrop-blur-sm hover:bg-slate-800/70 transition-all">
-                  <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-1">
-                    70+
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 backdrop-blur-sm hover:bg-slate-800/70 transition-all"
+                  >
+                    <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-1">
+                      {stat.value}
+                    </div>
+                    <div className="text-xs md:text-sm text-gray-400">{stat.label}</div>
                   </div>
-                  <div className="text-xs md:text-sm text-gray-400">GitHub Repos</div>
-                </div>
-
-                <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 backdrop-blur-sm hover:bg-slate-800/70 transition-all">
-                  <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-1">
-                    6+
-                  </div>
-                  <div className="text-xs md:text-sm text-gray-400">Projects Deployed</div>
-                </div>
-
-                <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 backdrop-blur-sm hover:bg-slate-800/70 transition-all">
-                  <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-1">
-                    85%
-                  </div>
-                  <div className="text-xs md:text-sm text-gray-400">Code Reuse Rate</div>
-                </div>
-
-                <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-4 backdrop-blur-sm hover:bg-slate-800/70 transition-all">
-                  <div className="text-2xl md:text-3xl font-bold text-blue-400 mb-1">
-                    149+
-                  </div>
-                  <div className="text-xs md:text-sm text-gray-400">Tests Passing</div>
-                </div>
+                ))}
               </motion.div>
             </div>
 
@@ -239,16 +214,16 @@ export default function Hero() {
 
                   {/* Main image container */}
                   <div className="relative aspect-square w-64 rounded-full overflow-hidden border-4 border-blue-500/30 shadow-2xl shadow-blue-500/20">
-  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
 
-  <Image
-    src="/profile.jpg"
-    alt="M. Anas Qadri"
-    fill
-    className="object-cover object-top"
-    priority
-  />
-</div>
+                    <Image
+                      src="/profile.jpg"
+                      alt="M. Anas Qadri"
+                      fill
+                      className="object-cover object-top"
+                      priority
+                    />
+                  </div>
 
                   {/* Decorative rings */}
                   <div className="absolute -inset-4 rounded-full border border-blue-500/20 animate-pulse animation-delay-1000" />
@@ -282,19 +257,19 @@ export default function Hero() {
                     &gt; Initializing development environment...
                   </div>
                   <div className="text-cyan-400 mb-2">
-                    &gt; Loading expertise modules
+                    &gt; Loading AI & full-stack modules
                   </div>
                   <div className="text-gray-300 mb-4">
-                    <span className="text-green-400">✓</span> Full Stack Architecture loaded
+                    <span className="text-green-400">✓</span> RAG · LLM · Voice AI loaded
                     <span className="animate-pulse ml-1">█</span>
                   </div>
 
                   {/* Available Roles */}
                   <div className="mt-4 text-gray-500 mb-2">// available_expertise</div>
                   <div className="grid grid-cols-1 gap-2">
-                    {roles.map((role, index) => (
+                    {roles.map((role) => (
                       <div
-                        key={index}
+                        key={role}
                         className="text-gray-400 hover:text-blue-400 transition-colors cursor-default"
                       >
                         → {role}
