@@ -81,7 +81,7 @@ export default function About() {
               </p>
 
               <p className="text-gray-400 mb-6">
-                📍 Karachi, Sindh, Pakistan
+                📍 Pakistan
               </p>
 
               <div className="space-y-5 text-gray-300 leading-relaxed">
