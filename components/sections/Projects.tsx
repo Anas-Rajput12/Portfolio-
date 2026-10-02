@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Eye } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import Link from 'next/link';
 
 interface Project {
@@ -23,17 +23,26 @@ interface Project {
 }
 
 interface ProjectsProps {
-  projects: Project[];
+  projects?: Project[];
 }
 
-export default function Projects({ projects }: ProjectsProps) {
+export default function Projects({ projects = [] }: ProjectsProps) {
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', ...Array.from(new Set(projects.map(p => p.category)))];
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set(projects.map((p) => p.category)))],
+    [projects]
+  );
 
-  const filteredProjects = selectedCategory === 'All'
-    ? projects
-    : projects.filter(p => p.category === selectedCategory);
+  // Featured projects first, then keep the original order
+  const filteredProjects = useMemo(() => {
+    const list =
+      selectedCategory === 'All'
+        ? projects
+        : projects.filter((p) => p.category === selectedCategory);
+
+    return [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
+  }, [projects, selectedCategory]);
 
   return (
     <section id="projects" className="py-20 bg-gradient-to-br from-slate-950 via-gray-950 to-slate-900 relative overflow-hidden">
@@ -56,7 +65,7 @@ export default function Projects({ projects }: ProjectsProps) {
             Projects
           </h2>
           <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-8 px-4">
-            Explore my portfolio of AI-powered applications and web development projects
+            Explore my portfolio of AI-powered applications, RAG chatbots, and full-stack projects
           </p>
 
           {/* Category Filter */}
@@ -64,6 +73,8 @@ export default function Projects({ projects }: ProjectsProps) {
             {categories.map((category) => (
               <button
                 key={category}
+                type="button"
+                aria-pressed={selectedCategory === category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-3 md:px-5 py-2 md:py-2.5 rounded-xl text-sm md:text-base font-medium transition-all duration-300 whitespace-nowrap ${
                   selectedCategory === category
@@ -84,7 +95,7 @@ export default function Projects({ projects }: ProjectsProps) {
               key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: Math.min(index, 5) * 0.1 }}
               viewport={{ once: true }}
             >
               <Card className="h-full flex flex-col bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm hover:border-blue-500/50 hover:bg-slate-800/70 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 group">
@@ -92,9 +103,11 @@ export default function Projects({ projects }: ProjectsProps) {
                   {/* Project Image/Placeholder */}
                   <div className="w-full h-48 bg-gradient-to-br from-blue-500 via-cyan-500 to-purple-600 rounded-lg mb-4 flex items-center justify-center text-white text-6xl overflow-hidden">
                     {project.imageUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={project.imageUrl}
                         alt={project.title}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     ) : (
@@ -115,15 +128,15 @@ export default function Projects({ projects }: ProjectsProps) {
                 </CardHeader>
 
                 <CardContent className="flex-grow">
-                  <p className="text-gray-400 mb-4">
+                  <p className="text-gray-400 mb-4 line-clamp-4">
                     {project.description}
                   </p>
 
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2">
-                    {project.techStack.slice(0, 4).map((tech, i) => (
+                    {project.techStack.slice(0, 4).map((tech) => (
                       <span
-                        key={i}
+                        key={tech}
                         className="px-2 py-1 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded text-xs"
                       >
                         {tech}
@@ -139,7 +152,7 @@ export default function Projects({ projects }: ProjectsProps) {
                   {/* Views */}
                   <div className="flex items-center gap-1 text-sm text-gray-400 mt-4">
                     <Eye className="w-4 h-4" />
-                    {project.views} views
+                    {project.views} {project.views === 1 ? 'view' : 'views'}
                   </div>
                 </CardContent>
 
