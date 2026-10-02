@@ -149,11 +149,7 @@ export default function Projects({ projects = [] }: ProjectsProps) {
                     )}
                   </div>
 
-                  {/* Views */}
-                  <div className="flex items-center gap-1 text-sm text-gray-400 mt-4">
-                    <Eye className="w-4 h-4" />
-                    {project.views} {project.views === 1 ? 'view' : 'views'}
-                  </div>
+                  
                 </CardContent>
 
                 <CardFooter className="flex gap-2">
